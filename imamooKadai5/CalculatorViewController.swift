@@ -13,17 +13,21 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak private var resultLabel: UILabel!
 
     @IBAction private func buttonPressed(_ sender: UIButton) {
-        if dividendTextField.text == "" {
+        guard let dividendNumber = Double(dividendTextField.text ?? "") else {
             displayAlert(message: "割られる数を入力してください")
-        } else if divisorTextField.text == "" {
-            displayAlert(message: "割る数を入力してください")
-        } else if divisorTextField.text == "0" {
-            displayAlert(message: "割る数には0を入力しないでください")
-        } else {
-            let dividendNumber = Double(dividendTextField.text ?? "") ?? 1
-            let divisorNumber = Double(divisorTextField.text ?? "") ?? 1
-            resultLabel.text = String(format: "%.5f", dividendNumber / divisorNumber)
+            return
         }
+        guard let divisorNumber = Double(divisorTextField.text ?? "") else {
+            displayAlert(message: "割る数を入力してください")
+            return
+        }
+
+        guard divisorNumber != 0 else {
+            displayAlert(message: "割る数には0を入力しないでください")
+            return
+        }
+
+        resultLabel.text = String(format: "%.5f", dividendNumber / divisorNumber)
     }
 
     private func displayAlert(message: String) {
