@@ -29,8 +29,9 @@ class CalculatorViewController: UIViewController {
     private func displayAlert(message: String) {
         let title = "課題5"
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(ok)
+        alert.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: nil)
+        )
         present(alert, animated: true, completion: nil)
     }
 }
